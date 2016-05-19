@@ -1,4 +1,7 @@
 package br.com.alexpfx.crawler;
+import br.com.alexpfx.crawler.parser.*;
+import br.com.alexpfx.crawler.visitor.*;
+
 import java.util.Set;
 
 /**
@@ -6,4 +9,6 @@ import java.util.Set;
  */
 public interface UrlCatcher {
     Set<String> extract(String url);
+    void setVisitor (Visitor visitor);
+    void setParser (Parser parser);
 }
