@@ -11,6 +11,8 @@ class SMCrawler implements Crawler, ItemCatcherListener {
     private ItemCatcher itemCatcher;
     private String baseUrl;
 
+
+
     @Override
     public void start() {
         Set<String> visit = new HashSet<>();
@@ -45,4 +47,18 @@ class SMCrawler implements Crawler, ItemCatcherListener {
     public void receive(Item item) {
 
     }
+
+    public void setUrlCatcher(UrlCatcher urlCatcher) {
+        this.urlCatcher = urlCatcher;
+    }
+
+    public void setItemCatcher(ItemCatcher itemCatcher) {
+        this.itemCatcher = itemCatcher;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+
 }
