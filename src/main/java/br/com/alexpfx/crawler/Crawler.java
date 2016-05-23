@@ -5,6 +5,5 @@ public interface Crawler {
     void setUrlCatcher (UrlCatcher urlCatcher);
     void setItemCatcher (ItemCatcher itemCatcher);
     void setBaseUrl (String baseUrl);
-
     void start();
 }
