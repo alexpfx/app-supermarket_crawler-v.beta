@@ -1,19 +1,17 @@
 package br.com.alexpfx.crawler;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import br.com.alexpfx.crawler.*;
 
-@Singleton
+import javax.inject.*;
+
 public class Application {
 
+    private final Crawler crawler;
+
     @Inject
-    private Crawler crawler;
+    Application(Crawler crawler) {
+        this.crawler = crawler;
+    }
 
-	public void run() {
-
-
+    public void run() {
         crawler.start();
-
-
-	}
+    }
 }

@@ -6,7 +6,6 @@ import br.com.alexpfx.crawler.visitor.*;
 import org.jsoup.nodes.*;
 import java.util.*;
 import org.jsoup.select.*;
-import javax.enterprise.inject.*;
 import javax.inject.Inject;
 
 
@@ -19,16 +18,18 @@ public class AngeloniUrlCatcher implements UrlCatcher {
 
     private static final String BASE_URI = "http://www.angeloni.com.br";
 
-    @Inject
+
     private Visitor visitor;
+
 
     private Parser<Document> parser;
 
-
+    @Inject
     public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 
+    @Inject
     public void setParser(Parser parser) {
         this.parser = parser;
     }

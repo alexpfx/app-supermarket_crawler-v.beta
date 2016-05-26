@@ -15,9 +15,6 @@ dependencies {
     // http://mvnrepository.com/artifact/org.jsoup/jsoup
     compile group: 'org.jsoup', name: 'jsoup', version: '1.9.1'
 
-    // http://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core
-    compile group: 'org.jboss.weld.se', name: 'weld-se-core', version: '2.3.4.Final'
-
 
     // http://mvnrepository.com/artifact/org.slf4j/slf4j-api
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
@@ -33,6 +30,14 @@ dependencies {
 
     // http://mvnrepository.com/artifact/com.google.inject/guice
     compile group: 'com.google.inject', name: 'guice', version: '4.0'
+
+    // http://mvnrepository.com/artifact/com.google.dagger/dagger
+    compile group: 'com.google.dagger', name: 'dagger', version: '2.4'
+
+    // http://mvnrepository.com/artifact/com.google.dagger/dagger-compiler
+    compile group: 'com.google.dagger', name: 'dagger-compiler', version: '2.4'
+
+
 
 
 

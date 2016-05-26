@@ -1,17 +1,18 @@
 package br.com.alexpfx.crawler;
 
-import javax.enterprise.inject.*;
 import java.util.*;
-
-public
-@Alternative
-class SMCrawler implements Crawler, ItemCatcherListener {
+import javax.inject.*;
+@Singleton
+public class SMCrawler implements Crawler, ItemCatcherListener {
 
     private UrlCatcher urlCatcher;
     private ItemCatcher itemCatcher;
     private String baseUrl;
 
+    @Inject
+    public SMCrawler (){
 
+    }
 
     @Override
     public void start() {

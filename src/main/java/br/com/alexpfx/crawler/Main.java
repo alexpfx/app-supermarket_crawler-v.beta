@@ -1,17 +1,22 @@
 package br.com.alexpfx.crawler;
 
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
+import br.com.alexpfx.crawler.di.*;
+import dagger.*;
+
+import javax.inject.*;
 
 public class Main {
 
+    @Singleton
+    @Component(modules = {CrawlerModule.class})
+    public interface CrawlerComponent {
+        Application createApplication();
+    }
 
     public static void main(String[] args) {
-        Weld weld = new Weld();
-        WeldContainer container = weld.initialize();
-        Application app = container.instance().select(Application.class).get();
-        app.run();
-        weld.shutdown();
+        CrawlerComponent component = DaggerMain_CrawlerComponent.builder().build();
+        Application app = component.createApplication ();
+        app.run ();
     }
 
 
