@@ -1,6 +1,8 @@
 package br.com.alexpfx.crawler.parser;
+
 import org.jsoup.*;
-import org.jsoup.nodes.Document;
+import org.jsoup.nodes.*;
+
 import java.nio.charset.*;
 
 /**
@@ -10,8 +12,8 @@ public class JsoupParser implements Parser<Document> {
     private static final String CHARSET = "ISO8859_1";
 
     @Override
-    public Document parse (String html){
-        Document doc = Jsoup.parse (html);
+    public Document parse(String html) {
+        Document doc = Jsoup.parse(html);
         doc.charset(Charset.forName(CHARSET));
         return doc;
     }

@@ -1,7 +1,8 @@
 package br.com.alexpfx.crawler;
 
-import java.util.*;
 import javax.inject.*;
+import java.util.*;
+
 @Singleton
 public class SMCrawler implements Crawler, ItemCatcherListener {
 
@@ -10,8 +11,10 @@ public class SMCrawler implements Crawler, ItemCatcherListener {
     private String baseUrl;
 
     @Inject
-    public SMCrawler (){
-
+    public SMCrawler(UrlCatcher urlCatcher, ItemCatcher itemCatcher, String baseUrl) {
+        this.urlCatcher = urlCatcher;
+        this.itemCatcher = itemCatcher;
+        this.baseUrl = baseUrl;
     }
 
     @Override
@@ -47,18 +50,6 @@ public class SMCrawler implements Crawler, ItemCatcherListener {
 
     public void receive(Item item) {
 
-    }
-
-    public void setUrlCatcher(UrlCatcher urlCatcher) {
-        this.urlCatcher = urlCatcher;
-    }
-
-    public void setItemCatcher(ItemCatcher itemCatcher) {
-        this.itemCatcher = itemCatcher;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
     }
 
 

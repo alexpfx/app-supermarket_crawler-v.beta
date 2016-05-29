@@ -9,6 +9,6 @@ import java.util.Set;
  */
 public interface UrlCatcher {
     Set<String> extract(String url);
-    void setVisitor (Visitor visitor);
-    void setParser (Parser parser);
+    void visitor(Visitor visitor);
+    void parser(Parser parser);
 }
