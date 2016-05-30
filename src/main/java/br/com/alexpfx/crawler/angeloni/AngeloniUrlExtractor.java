@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Created by alexandre on 17/05/2016.
  */
-public class AngeloniUrlCatcher implements UrlCatcher {
+public class AngeloniUrlExtractor  implements UrlExtractor<String, String> {
 
     private static final String BASE_URI = "http://www.angeloni.com.br";
 
@@ -32,8 +32,8 @@ public class AngeloniUrlCatcher implements UrlCatcher {
         this.parser = parser;
     }
 
-    public Set<String> extract(String url) {
-        String html = visitor.visit(url);
+    public Collection<String> extract(String baseUrl) {
+        String html = visitor.visit(baseUrl);
         Document doc = parser.parse(html);
         doc.setBaseUri(BASE_URI);
         Elements elements = doc.select("a.lnkTp01 ");
@@ -50,4 +50,6 @@ public class AngeloniUrlCatcher implements UrlCatcher {
         });
         return set;
     }
+
+
 }

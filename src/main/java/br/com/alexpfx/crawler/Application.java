@@ -12,6 +12,6 @@ public class Application {
     }
 
     public void run() {
-        crawler.start();
+        crawler.run();
     }
 }

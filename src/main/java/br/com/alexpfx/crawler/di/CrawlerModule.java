@@ -33,11 +33,10 @@ public class CrawlerModule {
     @Provides
     @Singleton
     @Named("angeloni")
-    UrlCatcher providesUrlCatcher(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
-        UrlCatcher urlCatcher = new AngeloniUrlCatcher();
-        urlCatcher.visitor(visitor);
-        urlCatcher.parser(parser);
-        return urlCatcher;
+    UrlExtractor providesUrlCatcher(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
+        UrlExtractor urlExtractor = new AngeloniUrlExtractor();
+
+        return urlExtractor;
     }
 
     @Provides
@@ -49,25 +48,16 @@ public class CrawlerModule {
 
     @Provides
     @Singleton
-    Crawler providesCrawler(@Named("angeloni") UrlCatcher urlCatcher, @Named("angeloni") ItemCatcher itemCatcher,
+    Crawler providesCrawler(@Named("angeloni") UrlExtractor urlExtractor, @Named("angeloni") ItemCatcher itemCatcher,
                             @Named("angeloni") String baseUrl) {
-        return new SMCrawler(urlCatcher, itemCatcher, baseUrl);
+        return new SMCrawler(urlExtractor, itemCatcher, baseUrl);
     }
 
     @Provides
     @Singleton
     @Named("angeloni")
     ItemCatcher providesItemCatcher() {
-        return new ItemCatcher() {
-            public void start(ItemCatcherListener l) {
-            }
-
-            public void push(String url) {
-            }
-
-            ;
-        };
-
+        return new AngeloniItemCatcher((item) -> System.out.println(item));
     }
 
 

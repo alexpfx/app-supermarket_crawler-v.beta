@@ -1,11 +1,7 @@
 package br.com.alexpfx.crawler.angeloni;
 
-import br.com.alexpfx.crawler.parser.*;
-import br.com.alexpfx.crawler.visitor.*;
 import org.junit.*;
 import org.junit.runner.*;
-
-import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -16,13 +12,13 @@ import static org.junit.Assert.*;
 
 public class AngeloniUrlCatcherTest {
 
-    AngeloniUrlCatcher catcher;
+    AngeloniUrlExtractor catcher;
 
     String url = "http://www.angeloni.com.br/super/index";
 
     @Before
     public void setUp() {
-//        catcher = new AngeloniUrlCatcher();
+//        catcher = new AngeloniUrlExtractor();
     }
 
 

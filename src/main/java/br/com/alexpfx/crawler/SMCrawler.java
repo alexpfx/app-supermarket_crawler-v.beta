@@ -4,21 +4,25 @@ import javax.inject.*;
 import java.util.*;
 
 @Singleton
-public class SMCrawler implements Crawler, ItemCatcherListener {
+public class SMCrawler implements Crawler{
 
-    private UrlCatcher urlCatcher;
+    private UrlExtractor<String, String> urlExtractor;
     private ItemCatcher itemCatcher;
     private String baseUrl;
 
     @Inject
-    public SMCrawler(UrlCatcher urlCatcher, ItemCatcher itemCatcher, String baseUrl) {
-        this.urlCatcher = urlCatcher;
+    public SMCrawler(UrlExtractor urlExtractor, ItemCatcher itemCatcher, String baseUrl) {
+        this.urlExtractor = urlExtractor;
         this.itemCatcher = itemCatcher;
         this.baseUrl = baseUrl;
     }
 
     @Override
-    public void start() {
+    public void run() {
+        Collection<String> urls = urlExtractor.extract(baseUrl);
+
+
+
         Set<String> visit = new HashSet<>();
         visit.add(baseUrl);
         Set<String> collected = new HashSet<>();
@@ -26,16 +30,16 @@ public class SMCrawler implements Crawler, ItemCatcherListener {
         loop(visit, collected);
 
         collected.forEach(e -> {
-            itemCatcher.push(e);
+
         });
-        itemCatcher.start(this);
+
     }
 
     public void loop(Set<String> visit, Set<String> collected) {
         do {
             final Set<String> set = new HashSet<>();
             visit.removeIf(v -> {
-                set.addAll(urlCatcher.extract(v));
+                set.addAll(urlExtractor.extract(v));
                 return true;
             });
             set.forEach(e -> {
@@ -51,6 +55,7 @@ public class SMCrawler implements Crawler, ItemCatcherListener {
     public void receive(Item item) {
 
     }
+
 
 
 }
