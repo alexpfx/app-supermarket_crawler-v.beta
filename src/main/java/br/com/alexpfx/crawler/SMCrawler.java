@@ -8,14 +8,12 @@ import java.util.function.*;
 public class SMCrawler implements Crawler, ItemExtractedListener<Item> {
 
     private String baseUrl;
-//    private UrlExtractorFunction urlExtractor;
     private UrlExtractor urlExtractor;
-
-    private BiConsumer<Collection<String>, ItemExtractedListener<Item>> itemExtractor;
+    private ItemExtractor itemExtractor;
 
     @Inject
     public SMCrawler(UrlExtractor urlExtractor,
-                     BiConsumer<Collection<String>, ItemExtractedListener<Item>> itemExtractor, String baseUrl) {
+                     ItemExtractor itemExtractor, String baseUrl) {
         this.urlExtractor = urlExtractor;
         this.itemExtractor = itemExtractor;
         this.baseUrl = baseUrl;
@@ -24,9 +22,9 @@ public class SMCrawler implements Crawler, ItemExtractedListener<Item> {
     @Override
     public void run() {
         Collection<String> urls = urlExtractor.extract(baseUrl);
-        itemExtractor.accept(urls, this);
-    }
+        itemExtractor.extract(urls, this);
 
+    }
 
     public void receive(Item item) {
 

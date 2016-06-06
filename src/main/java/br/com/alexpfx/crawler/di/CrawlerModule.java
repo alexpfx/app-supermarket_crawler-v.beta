@@ -1,8 +1,7 @@
 package br.com.alexpfx.crawler.di;
 
-
 import br.com.alexpfx.crawler.*;
-import br.com.alexpfx.crawler.angeloni.*;
+import br.com.alexpfx.crawler.extractors.*;
 import br.com.alexpfx.crawler.parser.*;
 import br.com.alexpfx.crawler.visitor.*;
 import dagger.*;
@@ -35,17 +34,24 @@ public class CrawlerModule {
     @Provides
     @Singleton
     @Named("angeloni")
-    UrlExtractor providesUrlCatcher(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
-        UrlExtractorCaller urlExtractorCaller = new UrlExtractorCaller(visitor, parser, UrlExtractors::angeloni);
-
+    UrlExtractor providesUrlExtractorCaller(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
+        UrlExtractorCaller urlExtractorCaller = new UrlExtractorCaller(visitor, parser, Angeloni::urlExtractor);
         return urlExtractorCaller;
+    }
+
+    @Provides
+    @Singleton
+    @Named("angeloni")
+    ItemExtractor providesItemExtractorCaller(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
+        ItemExtractorCaller caller = new ItemExtractorCaller(visitor, parser, Angeloni::itemExtractor);
+        return caller;
     }
 
 
     @Provides
     @Singleton
-    Crawler providesCrawler(@Named("angeloni") UrlExtractor caller) {
-        return new SMCrawler(caller, ItemExtractors::angeloni,
+    Crawler providesCrawler(@Named("angeloni") UrlExtractor urlExt, @Named("angeloni") ItemExtractor itemExt) {
+        return new SMCrawler(urlExt, itemExt,
                              ANGELONI_BASE_URL);
     }
 
