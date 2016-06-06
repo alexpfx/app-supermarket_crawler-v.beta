@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
 
 public class AngeloniUrlCatcherTest {
 
-    AngeloniUrlExtractor catcher;
+    AngeloniUrlExtractorCaller catcher;
 
     String url = "http://www.angeloni.com.br/super/index";
 
     @Before
     public void setUp() {
-//        catcher = new AngeloniUrlExtractor();
+//        catcher = new AngeloniUrlExtractorCaller();
     }
 
 

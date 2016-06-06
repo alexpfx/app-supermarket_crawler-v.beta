@@ -1,14 +1,8 @@
 package br.com.alexpfx.crawler;
-import br.com.alexpfx.crawler.parser.*;
-import br.com.alexpfx.crawler.visitor.*;
-import java.util.Collection;
-
-import java.util.Set;
-
+import java.util.*;
 /**
- * Created by alexandre on 17/05/2016.
- * Extrai recursivamente ou não todas as urls de uma url base.
+ * Created by alexandre on 04/06/2016.
  */
-public interface UrlExtractor<O, I> {
-    Collection<O> extract(I input);
+public interface UrlExtractor {
+    public Collection<String> extract (String baseUrl);
 }

@@ -10,8 +10,7 @@ public class SMCrawlerTest {
 
     @Before
     public void setUp() {
-        smCrawler = new SMCrawler(new AngeloniUrlExtractor(), new AngeloniItemCatcher(),
-                                  "http://angeloni.com.br/super/index");
+
     }
 
     @Test

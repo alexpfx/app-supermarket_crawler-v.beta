@@ -15,6 +15,8 @@ import javax.inject.*;
 @Module
 public class CrawlerModule {
 
+    public static final String ANGELONI_BASE_URL = "http://www.angeloni.com.br/super/index";
+
     @Provides
     @Singleton
     @Named("htmlUnit")
@@ -34,30 +36,17 @@ public class CrawlerModule {
     @Singleton
     @Named("angeloni")
     UrlExtractor providesUrlCatcher(@Named("htmlUnit") Visitor visitor, @Named("jsoup") Parser parser) {
-        UrlExtractor urlExtractor = new AngeloniUrlExtractor();
+        UrlExtractorCaller urlExtractorCaller = new UrlExtractorCaller(visitor, parser, UrlExtractors::angeloni);
 
-        return urlExtractor;
+        return urlExtractorCaller;
     }
+
 
     @Provides
     @Singleton
-    @Named("angeloni")
-    String providesBaseUrl() {
-        return "http://www.angeloni.com.br/super/index";
-    }
-
-    @Provides
-    @Singleton
-    Crawler providesCrawler(@Named("angeloni") UrlExtractor urlExtractor, @Named("angeloni") ItemCatcher itemCatcher,
-                            @Named("angeloni") String baseUrl) {
-        return new SMCrawler(urlExtractor, itemCatcher, baseUrl);
-    }
-
-    @Provides
-    @Singleton
-    @Named("angeloni")
-    ItemCatcher providesItemCatcher() {
-        return new AngeloniItemCatcher((item) -> System.out.println(item));
+    Crawler providesCrawler(@Named("angeloni") UrlExtractor caller) {
+        return new SMCrawler(caller, ItemExtractors::angeloni,
+                             ANGELONI_BASE_URL);
     }
 
 
