@@ -27,7 +27,7 @@ public class HtmlUnit implements Visitor {
         client.getOptions().setCssEnabled(false);
         client.getOptions().setThrowExceptionOnScriptError(false);
         client.setAjaxController(new NicelyResynchronizingAjaxController());
-        client.waitForBackgroundJavaScript(2000);
+        client.waitForBackgroundJavaScript(3000);
         return client;
     }
 

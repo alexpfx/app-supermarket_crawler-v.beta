@@ -11,10 +11,10 @@ import java.util.*;
 /**
  * Created by alexandre on 05/06/2016.
  */
-public interface Angeloni {
-    static final String BASE_URI = "http://www.angeloni.com.br";
-    static Collection<String> urlExtractor(String baseUrl, Visitor visitor, Parser parser) {
+public class Angeloni {
+    private static final String BASE_URI = "http://www.angeloni.com.br";
 
+    public static Collection<String> urlExtractor(String baseUrl, Visitor visitor, Parser parser) {
         String html = visitor.visit(baseUrl);
         Document doc = (Document) parser.parse(html);
         doc.setBaseUri(BASE_URI);
@@ -24,7 +24,7 @@ public interface Angeloni {
         return extract(elements);
     }
 
-    static Set<String> extract(Elements elements) {
+    private static Set<String> extract(Elements elements) {
         Set<String> set = new HashSet<>();
         elements.forEach(e -> {
             String href = e.attr("abs:href");
@@ -34,7 +34,7 @@ public interface Angeloni {
     }
 
 
-    static void itemExtractor(Collection<String> urls, ItemExtractedListener<Item> listener, Visitor visitor,
+    public static void itemExtractor(Collection<String> urls, ItemExtractedListener<Item> listener, Visitor visitor,
                          Parser parser) {
 
 
