@@ -3,6 +3,7 @@ package br.com.alexpfx.crawler.visitor;
 import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.*;
 
+
 import java.io.*;
 
 public class HtmlUnit implements Visitor {
@@ -11,14 +12,26 @@ public class HtmlUnit implements Visitor {
 
     @Override
     public String visit(String url) {
-        HtmlPage p = null;
+        Page p = null;
         try {
-            p = client.getPage(url);
-            return p.asXml();
+            p = visit(url, Page.class);
+            //            ScriptResult o = p.executeJavaScript("javascript:changeItemsPerPage(480);");
+            //            HtmlPage pp = (HtmlPage) o.getNewPage();
+            //            boolean isHtml = pp.isHtmlPage ();
+            //
+            //            String ppAsXml = pp.asXml ();
+            return ((HtmlPage)p).asXml();
+
         } catch (IOException e) {
             return "";
         }
     }
+
+
+    public <T> T visit(String url, Class<T> returnType) throws IOException{
+        return client.getPage(url);
+    }
+
 
     private WebClient initClient() {
         WebClient client;
@@ -27,7 +40,8 @@ public class HtmlUnit implements Visitor {
         client.getOptions().setCssEnabled(false);
         client.getOptions().setThrowExceptionOnScriptError(false);
         client.setAjaxController(new NicelyResynchronizingAjaxController());
-        client.waitForBackgroundJavaScript(3000);
+        client.waitForBackgroundJavaScript(20000);
+
         return client;
     }
 

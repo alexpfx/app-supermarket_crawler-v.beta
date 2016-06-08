@@ -22,8 +22,6 @@ public class HtmlUnitTest {
         String html = visitor.visit("http://www.google.com");
         assertNotNull(html);
         System.out.println(html);
-
-
     }
 
 

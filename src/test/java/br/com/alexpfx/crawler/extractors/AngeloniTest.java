@@ -23,12 +23,10 @@ public class AngeloniTest {
 
     @Test
     public void test() {
-        Collection<String> urls = Angeloni.urlExtractor("http://www.angeloni.com.br/super/index", visitor, parser);
+//
+        Collection<String> urls = Angeloni.urlExtractor("http://www.angeloni.com.br/super/index?grupo=9", visitor, parser);
         System.out.println(urls.size());
         assertNotNull(urls);
-
-
-
 
     }
 

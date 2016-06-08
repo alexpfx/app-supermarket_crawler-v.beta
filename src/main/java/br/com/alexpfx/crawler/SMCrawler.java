@@ -23,7 +23,6 @@ public class SMCrawler implements Crawler, ItemExtractedListener<Item> {
     public void run() {
         Collection<String> urls = urlExtractor.extract(baseUrl);
         itemExtractor.extract(urls, this);
-
     }
 
     public void receive(Item item) {
